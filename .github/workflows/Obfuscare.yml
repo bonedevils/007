@@ -34,15 +34,13 @@ jobs:
 
       - name: Obfuscate BPB worker js
         run: |
-          javascript-obfuscator origin.js --output _worker.js \
-          --compact true \
-          --identifier-names-generator hexadecimal \
-          --rename-globals true \
-          --string-array true \
-          --string-array-encoding 'base64' \
-          --string-array-threshold 0.5 \
-          --transform-object-keys false \
-          --unicode-escape-sequence false
+            javascript-obfuscator origin.js --output _worker.stage1.js \
+            --compact true \
+            --rename-globals true
+            
+            javascript-obfuscator _worker.stage1.js --output _worker.js \
+            --string-array true \
+            --string-array-threshold 0.3
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5
