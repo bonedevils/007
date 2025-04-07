@@ -36,13 +36,13 @@ jobs:
         run: |
           javascript-obfuscator origin.js --output _worker.js \
           --compact true \
-          --control-flow-flattening false \  # 先禁用最耗资源的选项
-          --dead-code-injection false \      # 禁用死代码注入
           --identifier-names-generator hexadecimal \
           --rename-globals true \
           --string-array true \
-          --string-array-encoding 'base64' \ # 改用base64编码
-          --string-array-threshold 0.75      # 降低阈值
+          --string-array-encoding 'base64' \
+          --string-array-threshold 0.5 \
+          --transform-object-keys false \
+          --unicode-escape-sequence false
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5
